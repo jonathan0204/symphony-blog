@@ -75,4 +75,17 @@ class Tag
 
         return $this;
     }
+	
+	public function addStudiedGenus(Tag $tags)
+	{
+		if ($this->studiedGenuses->contains($tags)) {
+			return;
+		}
+		$this->studiedGenuses[] = $tags;
+	}
+	
+	public function removeStudiedGenus(tag $tags)
+	{
+		$this->studiedGenuses->removeElement($tags);
+	}
 }

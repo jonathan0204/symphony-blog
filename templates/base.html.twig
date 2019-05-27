@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="build/css/app.css"
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+
+            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('global') }}
+        {% endblock %}
     </head>
     <body>
+    {% block header %} {% include '/blog/navbar.html.twig' %} {% endblock %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>
