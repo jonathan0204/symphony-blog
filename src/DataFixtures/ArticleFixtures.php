@@ -20,7 +20,6 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 		for ($i = 0; $i < 50; $i++) {
 			$article = new Article();
 			$article->setTitle(mb_strtolower($faker->sentence()));
-			$article->setTitle($faker->name);
 			$article->setContent($faker->sentences($nbWords = 6, $variableNbWords = true));
 			
 			
