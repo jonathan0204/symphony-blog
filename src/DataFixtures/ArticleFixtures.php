@@ -2,6 +2,7 @@
 	
 namespace App\DataFixtures;
 
+use App\Service\Slugify;
 use  Faker;
 use App\Entity\Article;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,6 +22,10 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 			$article = new Article();
 			$article->setTitle(mb_strtolower($faker->sentence()));
 			$article->setContent($faker->sentences($nbWords = 6, $variableNbWords = true));
+			
+			$slugify = New Slugify();
+			$slug = $slugify->generate($article->getTitle());
+			$article->setSlug($slug);
 			
 			
 			
