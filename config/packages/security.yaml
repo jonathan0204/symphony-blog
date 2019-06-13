@@ -22,6 +22,10 @@ security:
             logout:
                 path: app_logout
 
+    role_hierarchy:
+        ROLE_AUTHOR:    ROLE_USER
+        ROLE_ADMIN:     ROLE_AUTHOR
+
             # activate different ways to authenticate
 
             # http_basic: true
@@ -35,3 +39,4 @@ security:
     access_control:
         # - { path: ^/login$, roles: IS_AUTHENTIFICATED_ANONYMOUSLY }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/article, roles: ROLE_AUTHOR }

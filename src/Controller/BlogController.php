@@ -15,12 +15,13 @@ use App\Form\CategoryType;
 
 class BlogController extends AbstractController
 {
-	 /**
+	
+ /**
  * Show all row from article's entity
- *
  * @Route("/", name="blog_index")
  * @return Response A response instance
  */
+	
  public function index(ObjectManager $manager)
  {
 	 $articles = $this->getDoctrine()
@@ -76,7 +77,6 @@ class BlogController extends AbstractController
  * Getting a article with a formatted slug for title
  *
  * @param string $slug The slugger
- *
  * @Route("blog/show/{slug<^[a-z0-9-]+$>}",
  *     defaults={"slug" = null},
  *     name="blog_show")
