@@ -89,7 +89,7 @@ class ArticleController extends AbstractController
 	    $slug = $slugify->generate($article->getTitle());
 	    $article->setSlug($slug);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() &&($this->isGranted('ROLE_ADMIN') || $this->getUser()==$article->getAuthor())) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_index', [
