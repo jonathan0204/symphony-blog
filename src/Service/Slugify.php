@@ -4,6 +4,7 @@
 	
 	class Slugify
 	{
+		
 		public function generate($str)
 		{
 			 $str = str_replace("", "-", $str);

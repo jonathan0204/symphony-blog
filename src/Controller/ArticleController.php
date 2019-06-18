@@ -23,7 +23,7 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articleRepository->findAllWithCategoriesAndTags(),
         ]);
     }
 
@@ -41,6 +41,7 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 	        $slug = $slugify->generate($article->getTitle());
 	        $article->setSlug($slug);
+	        $article->setAuthor($this->getUser());
             $entityManager->persist($article);
             $entityManager->flush();
 	        $message = (new \Swift_Message('Un nouvel article vient d\'être publié !'))
@@ -50,15 +51,15 @@ class ArticleController extends AbstractController
 		        ->setTo('jonathansaintclemente@gmail.com')
 		        //->setBody('Un nouvel article vient d\'être publié sur le blog !')
 	            ->setBody(
-        $this->renderView(
-        	'sendEmail.html.twig',
-	        ['name'=>$article->getTitle(),
-		        'id'=>$article->getId()]
-        ),
-	        'text/html'
-    
-        );
-    $mailer->send($message);
+			        $this->renderView(
+			            'sendEmail.html.twig',
+				        ['name'=>$article->getTitle(),
+					        'id'=>$article->getId()]
+			        ),
+				        'text/html'
+			    
+			        );
+		    $mailer->send($message);
 
             return $this->redirectToRoute('article_index');
         }
